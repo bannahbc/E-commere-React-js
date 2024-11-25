@@ -1,0 +1,13 @@
+.loading {
+    margin-top: 25px;
+    .loading-wrap{
+    /* background-color: rgb(230, 255, 255); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    transition: all .4s;
+    img{
+        max-width: 25px;
+    }}
+}

@@ -1,0 +1,7 @@
+.card-wrapper{
+    max-width: 150px;
+    background-color: rebeccapurple;
+}
+.card-image img{
+    max-width: 150px;
+}
