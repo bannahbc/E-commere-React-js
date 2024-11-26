@@ -19,6 +19,9 @@ import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons/faMoneyBillWa
 import { faAccusoft } from '@fortawesome/free-brands-svg-icons/faAccusoft'
 import { faPersonWalkingDashedLineArrowRight } from '@fortawesome/free-solid-svg-icons/faPersonWalkingDashedLineArrowRight'
 import { faSquareGitlab } from '@fortawesome/free-brands-svg-icons/faSquareGitlab'
+import Card from '../../Components/Cards/Cards'
+
+
 function Product(props) {
   const {product_id} = useParams()
   const [api_data,setApiData] = useState(null)
@@ -123,6 +126,9 @@ function Product(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="similarProduct mt-10">
+        <Card heading="Similar Products" category={api_data.category_id}/>
       </div>
     </div>
     </>

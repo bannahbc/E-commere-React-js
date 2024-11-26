@@ -12,7 +12,6 @@ function Category() {
             .then(res=>setApiData(res))
             .catch(err=>console.log(err))
         }
-        console.log(apiData,"api data data data")
         category();
     },[])
     if(apiData){
@@ -23,7 +22,7 @@ function Category() {
             {
                 apiData.map((data,index)=>{
                     return(
-                        <Link to={'/products'}>
+                        <Link to={{pathname:`/category/products`}} state={{message:data.category_name,category_id:data.hash}}>
                         <div key={index} className="categoryCard w-52 h-20 flex transform transition-all duration-500 hover:shadow-none justify-center items-center cursor-pointer bg-gray-300 px-5 py-4 rounded-sm shadow-md">
                 <p>{data.category_name}</p>
             </div>

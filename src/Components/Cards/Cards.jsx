@@ -6,15 +6,20 @@ import axios from 'axios'
 import { faCarTunnel } from '@fortawesome/free-solid-svg-icons'
 import Loading from '../Loading/Loading'
 import Error from '../Error/Error'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 
 const Card =(props)=>{
+  const location = useLocation()
+  const {message,category_id} = location.state ||{}
   const [api_data,setApiData]=useState(null)
   const [loading,SetLoading] = useState(true)
+  var cc = props.category??category_id ?? ""
   const btnClass = "px-4 py-1 text-gray-100 rounded-sm  transform transition-all hover:translate-y-0.5 duration-300 hover:shadow-xl hover:transition-x-2 transition-all transform"
   useEffect(()=>{
-      const product = axios.get(`${api_url}/products`)
+      const product = axios.get(`${api_url}/products`,{
+        params: {category:cc}
+      })
       .then(res=>res.data)
       .then(res=>setApiData(res))
       .catch(err=>{})
@@ -33,7 +38,7 @@ const Card =(props)=>{
     <div className='card '>
       <div className="card-title flex p-4 flex-col items-center  bg-gray-50">
 
-        <h3 className=' font-light text-2xl'>{props.heading}</h3>
+        <h3 className=' font-light text-2xl capitalize'>{props.heading??message??"Products"}   </h3>
         <hr className='w-52 border-0 rounded h-0.5 bg-gray-400 m-auto mt-1'/>
       </div>
     <div className="bg-gray-100 w-full min-h-screen gap-6 flex-wrap flex justify-center items-center p-5">
@@ -75,6 +80,49 @@ const Card =(props)=>{
 }
 
 export default Card;
+
+
+// axios finally
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+
+// function MyComponent(props) {
+//   const [apiData, setApiData] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       try {
+//         const response = await axios.get(`${api_url}/products`, {
+//           params: { category: props.category }, // Use `params` for query parameters
+//         });
+//         setApiData(response.data);
+//       } catch (error) {
+//         console.error("Error fetching products:", error);
+//       } finally {
+//         setLoading(false); // Ensure this runs regardless of success or failure
+//       }
+//     };
+
+//     fetchProducts();
+//   }, [props.category]); // Add `props.category` to dependency array
+
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   return (
+//     <div>
+//       {/* Render your data here */}
+//       {apiData.map((product) => (
+//         <div key={product.id}>{product.name}</div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default MyComponent;
+
 
 
 // import React,{useEffect, useState} from 'react'
